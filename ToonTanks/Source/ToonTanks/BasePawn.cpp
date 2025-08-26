@@ -71,7 +71,8 @@ void ABasePawn::Fire()
 	FVector Location = ProjectitleSpawnPoint->GetComponentLocation();
 	FRotator Rotation = ProjectitleSpawnPoint->GetComponentRotation();
 
-	GetWorld()->SpawnActor<AProjectitle>(ProjectileClass, Location, Rotation);
+	auto Projectile = GetWorld()->SpawnActor<AProjectitle>(ProjectileClass, Location, Rotation);
+	Projectile->SetOwner(this);
 }
 
 
