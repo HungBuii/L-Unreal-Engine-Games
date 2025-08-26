@@ -25,7 +25,8 @@ AProjectitle::AProjectitle()
 void AProjectitle::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	ProjectitleMesh->OnComponentHit.AddDynamic(this, &AProjectitle::OnHit);
 }
 
 // Called every frame
@@ -33,5 +34,17 @@ void AProjectitle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AProjectitle::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("OnHit"));
+	UE_LOG(LogTemp, Warning, TEXT("HitComp: %s"), *HitComp->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("OtherActor: %s"), *OtherActor->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("OtherComp: %s"), *OtherComp->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("NormalImpulse: %s"), *NormalImpulse.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *Hit.ToString());
+	
 }
 
