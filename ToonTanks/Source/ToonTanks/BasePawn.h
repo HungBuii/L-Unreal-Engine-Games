@@ -47,4 +47,9 @@ private:
 	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Super Duper", meta=(AllowPrivateAccess = "true"))
 	// int32 EditAnywhereInt = 22
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystem* DeathParticles;
+
+	UPROPERTY(EditAnywhere, Category="Combat")
+	class USoundBase* DeathSound;
 };

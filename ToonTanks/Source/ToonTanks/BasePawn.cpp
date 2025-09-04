@@ -78,7 +78,15 @@ void ABasePawn::Fire()
 void ABasePawn::HandleDestruction()
 {
 	/* TODO: visual/sound effects */
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+	}
 	
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+	}
 }
 
 
