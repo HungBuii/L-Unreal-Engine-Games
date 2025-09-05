@@ -57,15 +57,15 @@ void AProjectitle::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrim
 	// UE_LOG(LogTemp, Warning, TEXT("NormalImpulse: %s"), *NormalImpulse.ToString());
 	// UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *Hit.ToString());
 
-	auto MyOwner = GetOwner();
+	AActor* MyOwner = GetOwner();
 	if (MyOwner == nullptr)
 	{
 		Destroy();
 		return;
 	}
 
-	auto MyOwnerInstigator = MyOwner->GetInstigatorController();
-	auto DamageTypeClass = UDamageType::StaticClass();
+	AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
+	UClass* DamageTypeClass = UDamageType::StaticClass();
 
 	if (OtherActor != nullptr && OtherActor != this && OtherActor != MyOwner)
 	{
@@ -77,6 +77,10 @@ void AProjectitle::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrim
 		if (HitSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+		}
+		if (HitCameraShakeClass)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShakeClass);
 		}
 	}
 	
